@@ -23,8 +23,7 @@ public class ForeksPages {
 
     @AndroidFindBy(id = "foreks.android:id/activityTutorial_textView_close")
     public MobileElement yanMenuReklamExit;
-    @AndroidFindBy(xpath = "\t\n" +
-            "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View")
+    @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View")
     public MobileElement reklamExit;
 
     @AndroidFindBy (id="foreks.android:id/screenWarrantMain_linearLayout_alternativeWarrantList")
