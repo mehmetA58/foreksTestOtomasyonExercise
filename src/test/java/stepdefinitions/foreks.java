@@ -35,7 +35,7 @@ public class foreks {
             Driver.getAppiumDriver().findElement(By.id("foreks.android:id/activityTutorial_textView_close")).click();
 
         } catch (NoSuchElementException e) {
-            //e.printStackTrace();
+            System.out.println("Yan Menu reklam gozukmedi");
         }
 
         Assert.assertTrue(foreksPages.varantTab.isDisplayed());
@@ -47,7 +47,7 @@ public class foreks {
             Driver.getAppiumDriver().navigate().back();
 
         } catch (NoSuchElementException e) {
-            //e.printStackTrace();
+            System.out.println("Varant Tanıtım Video gozukmedi.");
 
         }
     }
