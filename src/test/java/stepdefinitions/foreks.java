@@ -6,8 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import pages.ios.ForeksPages;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.android.ForeksPages;
+
 import utilities.Driver;
 import utilities.ReusableMethods;
 
@@ -25,13 +29,31 @@ public class foreks {
 
     @When("kullanici Varant Tabina tiklar")
     public void kullaniciVarantTabinaTiklar() {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getAppiumDriver(), 180);
+            wait.until(ExpectedConditions.visibilityOf(Driver.getAppiumDriver().findElement(By.id("foreks.android:id/activityTutorial_textView_close"))));
+            Driver.getAppiumDriver().findElement(By.id("foreks.android:id/activityTutorial_textView_close")).click();
+
+        } catch (NoSuchElementException e) {
+            //e.printStackTrace();
+        }
+
+        Assert.assertTrue(foreksPages.varantTab.isDisplayed());
         foreksPages.varantTab.click();
 
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getAppiumDriver(), 180);
+            wait.until(ExpectedConditions.visibilityOf(Driver.getAppiumDriver().findElement(By.id("foreks.android:id/activityYouTube_youTubePlayerView"))));
+            Driver.getAppiumDriver().navigate().back();
 
+        } catch (NoSuchElementException e) {
+            //e.printStackTrace();
 
+        }
     }
     @When("kullanici yukselenler-dusenler subtabina tiklar")
     public void kullaniciYukselenlerDusenlerSubtabinaTiklar() {
+        Assert.assertTrue(foreksPages.yukselenlerDusenler.isDisplayed());
         foreksPages.yukselenlerDusenler.click();
     }
 
@@ -43,11 +65,11 @@ public class foreks {
         List<String>rowString=new ArrayList<>();
         for (int i = 0; i <row.size() ; i++) {
             rowString.add(row.get(i).getText().replace("%", "").replace(".", "").replace(",", "."));
-            //System.out.println(row.get(i).getText());
+
         }
 
         for (int i = 1; i < rowString.size() ; i++) {
-            Assert.assertTrue(Float.parseFloat(rowString.get(i))<Float.parseFloat(rowString.get(i-1)));
+            Assert.assertTrue(Float.parseFloat(rowString.get(i))<=Float.parseFloat(rowString.get(i-1)));
         }
         
     }
@@ -55,6 +77,7 @@ public class foreks {
     @When("kullanici dusenler subtabina tiklar")
     public void kullaniciDusenlerSubtabinaTiklar() {
         ReusableMethods.waitSeconds(3);
+        Assert.assertTrue(foreksPages.dusenlerTab.isDisplayed());
         foreksPages.dusenlerTab.click();
     }
 
@@ -67,9 +90,9 @@ public class foreks {
             rowString.add(row.get(i).getText().replace("%", "").replace(".", "").replace(",", "."));
 
         }
-        System.out.println("List: " + rowString);
+
         for (int i = 1; i < rowString.size() ; i++) {
-            Assert.assertTrue(Float.parseFloat(rowString.get(i))>Float.parseFloat(rowString.get(i-1)));
+            Assert.assertTrue(Float.parseFloat(rowString.get(i))>=Float.parseFloat(rowString.get(i-1)));
         }
     }
 
